@@ -1,7 +1,12 @@
 # Reads through all of the Kiva API loan data snapshots and determines the repayment rate for repeat borrowers and first
 # time borrowers (identified by tags). Thanks to build.kiva.org for providing the snapshots.
+# Thanks to https://stackoverflow.com/questions/26615019/python-proportion-test-similar-to-prop-test-in-r for the p
+# value test idea.
 
 import json
+import numpy
+from scipy import stats
+
 
 repeatpaid = 0
 repeatdefault = 0
@@ -36,3 +41,6 @@ for i in range(1, 1980): #To read every loan file
 
 print("Repayment Rate for #RepeatBorrower: " + str(round((1-repeatdefault/(repeatpaid+repeatdefault))*100, 2)) + "%")
 print("Repayment Rate for #FirstLoan: " + str(round((1-firstdefault/(firstpaid+firstdefault))*100, 2)) + "%")
+data = numpy.array([[firstpaid, firstdefault], [repeatpaid, repeatdefault]])
+values = stats.chi2_contingency(data)
+print("P value: " + str(values[1]))
