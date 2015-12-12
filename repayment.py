@@ -35,4 +35,4 @@ for i in range(1, 1980): #To read every loan file
                     firstdefault += 1
 
 print("Repayment Rate for #RepeatBorrower: " + str(round((1-repeatdefault/(repeatpaid+repeatdefault))*100, 2)) + "%")
-print("Repayment Rate for #FirstLoan: " + str((round((1-firstdefault/(firstpaid+firstdefault)*100), 2))) + "%")
+print("Repayment Rate for #FirstLoan: " + str(round((1-firstdefault/(firstpaid+firstdefault))*100, 2)) + "%")
